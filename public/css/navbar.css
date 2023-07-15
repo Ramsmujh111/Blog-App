@@ -1,0 +1,20 @@
+
+.customs-navbar-main {
+    background-color:darkslategrey;
+    height: 80px;
+}
+.customs-font-set img{
+    width: 70px;
+    height: 50px;
+    padding-left: 10px;
+}
+/* a {
+    font-style: italic;
+    font-family:Verdana, Geneva, Tahoma, sans-serif ;
+    font-size: xx-large;
+} */
+
+.SignUp-class{
+    border: solid rgb(167, 136, 136) 1px;
+    border-radius: 2px ;
+}
