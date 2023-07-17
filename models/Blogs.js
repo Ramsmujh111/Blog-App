@@ -12,6 +12,13 @@ const Blogs    = new Schema({
     FileDestination:{
         type:String,
     },
+    like:{
+        type:Number,
+    },
+    comment:{
+        commentId:String,
+        comment:String
+    }
 },{
     timestamps:true
 })
