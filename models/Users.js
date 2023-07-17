@@ -14,11 +14,18 @@ const User     = new Schema({
     },
     password:{
         type:String,
+        default:null,
     },
     imageUrl:{
         type:String,
-        default:false,
+        default:null,
     },
+    accessToken:{
+        type:String,
+    },
+    googleId:{
+        type:String,
+    }
 })
 
 module.exports = mongoose.model('User' , User);
