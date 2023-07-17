@@ -15,7 +15,15 @@ const ValidateLogin = Joi.object({
     .pattern(new RegExp('^[a-zA-Z0-9]{3,30}$')),
 })
 
+const validateBlog = Joi.object({
+    title:Joi.string().min(3).required(),
+    description:Joi.string().min(20).required(),
+    fileUpload:Joi.string().required()
+
+})
+
 module.exports = {
     ValidateSchema,
-    ValidateLogin
+    ValidateLogin,
+    validateBlog
 }
