@@ -17,5 +17,11 @@ routes.get('/add-blog' ,isLogin, AdminController.getAddPost);
 
 routes.post('/add-blog' , isLogin, upload.single('fileUpload') , AdminController.postAddBlog);
 
+routes.get('/edit-page/:id' , isLogin , AdminController.editPage);
+
+routes.put('/edit-page/:id' , AdminController.editPost);
+
+routes.delete('/delete/:id' , AdminController.delete);
+
 module.exports = routes;
 

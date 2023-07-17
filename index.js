@@ -5,6 +5,8 @@ const cors      =   require('cors');
 const Session   =   require('express-session')
 const cookiesParser = require('cookie-parser');
 const MongoStore = require('connect-mongo');
+const morgan = require('morgan');
+const methodOveride = require('method-override');
 const PORT      =   process.env.PORT || 5000;
 const passport  = require('passport');
 const passportSetUp = require('./config/passport-setup');
@@ -21,6 +23,8 @@ App.use(express.urlencoded({extended:false}));
 // setup the view engine
 App.set('view engine' , "ejs");
 App.set('views' , 'views');
+App.use(morgan('dev'))
+App.use(methodOveride("_method"))
 // setup the static file to save access css or js file extension
 App.use(express.static('public'));
 // db connection

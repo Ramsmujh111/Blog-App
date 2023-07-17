@@ -1,0 +1,18 @@
+<%-include("includes/headers.ejs")%>
+<link rel="stylesheet" type="text/css" href="/css/cart.css">
+</head>
+<body>
+    <%-include("includes/navbar.ejs")%>
+    <div class="card">
+        <div class="card-body">
+          <h5 class="card-title" style="text-align: center; font-family: 'Times New Roman', Times, serif; font-size: xx-large;"><%= blogs.title %></h5>
+          <img src="<%= blogs.FileDestination %>" class="card-img-bottom" alt="..." style=" display: block;
+          margin-left: auto;
+          margin-right: auto;
+          width: 50%;">
+          <p class="card-text" style="font-style: oblique; font-size: x-large; text-align: center;"><%=blogs.description %></p>
+          <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
+        </div>
+      </div>
+
+    <%-include("includes/end.ejs")%>

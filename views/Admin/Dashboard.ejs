@@ -11,29 +11,19 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <th scope="row">1</th>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
-        <td><a href=""><button>Edit</button></a></td>
-        <td><a href=""><button>Delete</button></a></td>
-      </tr>
-      <tr>
-        <th scope="row">2</th>
-        <td>Jacob</td>
-        <td>Thornton</td>
-        <td>@fat</td>
-        <td><a href=""><button>Edit</button></a></td>
-        <td><a href=""><button>Delete</button></a></td>
-      </tr>
-      <tr>
-        <th scope="row">3</th>
-        <td colspan="2">Larry the Bird</td>
-        <td>@twitter</td>
-        <td><a href=""><button>Edit</button></a></td>
-        <td><a href=""><button>Delete</button></a></td>
-      </tr>
+         <% for(let i=0; i<blogs.length; i++) {%>
+          <tr>
+            <th scope="row"><%=  i+1 %></th>
+            <td><%= blogs[i].title %></td>
+            <td><%= blogs[i].description %></td>
+            <td><img src="<%= blogs[i].FileDestination %>" class="img-fluid" style="width: 70px;
+              height: 50px;" alt=""></td>
+            <td><a href="/blog/admin/edit-page/<%=blogs[i]._id%>?_method=PUT"><button>Edit</button></a></td>
+            <form action="/blog/admin/delete/<%=blogs[i].id%>?_method=DELETE" method="post">
+              <td><a href="/blog/admin/delete/<%=blogs[i]._id%>?_method=DELETE"><button type="submit">Delete</button></a></td>
+            </form>
+          </tr>
+        <% } %>    
     </tbody>
   </table>  
 </div>

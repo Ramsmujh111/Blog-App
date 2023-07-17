@@ -4,13 +4,14 @@
 <body>
     <%-include("includes/navbar.ejs")%>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
-    <% for(let i = 0; i<4; i++){ %>
+    <% for(let i = 0; i<blogs.length; i++){ %>
         <div class="card" style="margin: 40px 200px 60px 200px;">
-            <img src="https://helpx.adobe.com/content/dam/help/en/photoshop/using/convert-color-image-black-white/jcr_content/main-pars/before_and_after/image-before/Landscape-Color.jpg" class="card-img-top" alt="...">
+            <img src="<%= blogs[i].FileDestination %>" class="card-img-top" style="
+            height: 300px;" alt="...">
             <div class="card-body">
-              <h5 class="card-title ">Card title</h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
+              <h5 class="card-title "><%= blogs[i].title %></h5>
+              <p class="card-text"><%= blogs[i].description %></p>
+              <a href="/blogs/<%=blogs[i]._id%>" class="btn btn-primary">Read.......</a>
             </div>
           </div>          
         <% } %>

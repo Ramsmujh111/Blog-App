@@ -1,0 +1,24 @@
+<%-include("includes/headers.ejs")%>
+<%-include("Admin/Admin.ejs")%>
+</head>
+<body>
+    <div class="container-fluid w-75 p-3">
+        <form action="/blog/admin/edit-page/<%= blogs._id%>?_method=PUT" method="post">
+            <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">Title</label>
+                <input type="text" class="form-control" id="exampleFormControlInput1" value="<%=blogs.title%>" name="title">
+            </div>
+            <div class="mb-3">
+                <label for="exampleFormControlTextarea1" class="form-label">Description</label>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="description"><%=blogs.description%></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="formFileMultiple" class="form-label">Upload File</label>
+                <input class="form-control" type="file" id="formFileMultiple" multiple name="fileUpload" value="<%=blogs.FileDestination%>">
+            </div>
+            <div class="d-grid gap-2">
+                <button class="btn btn-primary" type="submit">update blog</button>
+            </div>         
+        </form>
+    </div>
+<%- include("includes/end.ejs")%>
