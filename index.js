@@ -10,12 +10,14 @@ const methodOveride = require('method-override');
 const PORT      =   process.env.PORT || 5000;
 const passport  = require('passport');
 const passportSetUp = require('./config/passport-setup');
+const Linkedin = require('./config/linkedin');
 const dbConnection = require('./config/db-connect');
 const App       =   express();
 const BlogRoutes=   require('./routes/BlogRoutes');
 const AuthRoutes=   require('./routes/auth');
 const AdminRoutes = require('./routes/AdminRoutes');
 const GoogleAuthRoutes = require('./routes/googleAuth');
+const LinkedinRoutes = require('./routes/linkedin');
 // Initialize the Body parse for json data
 App.use(express.json());
 // Initialize the form-data from data
@@ -53,6 +55,7 @@ App.use(BlogRoutes);
 App.use('/Blog' , AuthRoutes);
 // implement google auth
 App.use(GoogleAuthRoutes);
+App.use(LinkedinRoutes);
 
 
 App.listen(PORT , ()=> {

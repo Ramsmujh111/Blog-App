@@ -1,1 +1,12 @@
 // Blog Application
+ <% if(blogs.comment.lenght < 0) { %>
+                            <div class="mt-2">
+                                <p class="comment-text">not any comment yet</p>
+                            </div>
+                        <% } else { %>
+                              <% for(let i = 0; i<blogs.comment.lenght; i++) { %>
+                                <div class="mt-2">
+                                    <p class="comment-text"><%= blogs.comment[i] %></p>
+                                </div>
+                            <% } %>
+                        <% } %>

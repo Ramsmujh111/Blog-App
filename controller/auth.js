@@ -66,7 +66,7 @@ exports.postLogin = async (req, res)=> {
         }
         const token = jwt.sign(
             {
-                user:Validator._id
+                _id:users._id
             },
             process.env.JWT_TOKEN,
             {

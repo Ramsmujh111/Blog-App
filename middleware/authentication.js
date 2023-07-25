@@ -1,34 +1,45 @@
 const jwt = require('jsonwebtoken');
-const SignupWithPassword = async (req , res) => {
+const Linkedine = require('../models/LinkdinUser');
+const isLogin = async (req , res , next) => {
     try {
         let accessToken = req.cookies.token;
-        if(!accessToken){
-           return res.render('login.ejs' , {pageTitle:"Login Please" , message:'unauthorized' , status:false})
+        console.log(accessToken);
+        if(!accessToken && !req.user){
+            res.render('login.ejs' , {pageTitle:"Login Please" , message:'unauthorized' , status:false})
+        }else if(accessToken){
+            let decode = jwt.verify(accessToken , process.env.JWT_TOKEN);
+            // console.log(JSON.stringify(decode)+'============comming from middleware');
+            req.user = decode
+            // console.log(req.user+'comming from middleware');
+            return next();
+        }else{
+            return next();
         }
-        // verified the accessToken
-        let decode = jwt.verify(accessToken , process.env.JWT_TOKEN);
-        req.userId = decode._id;
-        return true;
     } catch (error) {
         console.log(error.message);
         res.status(500).render('login.js' , {pageTitle:'Login page' , message:error.message});
     }
 }
 
-const GoogleIsLogin = (req, res) =>{
-    if(req.user){
-        return true;
-    }
-    res.redirect('/blog/admin/login');
+const LinkedineAuthetication = async (req, res , next) =>{
+     try {
+        let accessToken  = req.cookies.Token;
+        if(!accessToken){
+            return res.redirect('/getAccessToke');
+        }
+        let existToken = await Linkedine.findOne({accessToken:accessToken});
+        if(!existToken){
+            return res.redirect('/getAccessToke');
+        }
+        next();
+     } catch (error) {
+        console.log(error.message);
+        console.log(error.stack);
+        res.redirect('/getAccessToke')
+     }
 }
 
-const isLogin = (req, res, next) =>{
-    if(GoogleIsLogin(req,res) || SignupWithPassword(req,res)){
-       return next();
-    }else {
-        res.redirect('/blog/admin/login')
-    }
-}
-
-
-module.exports = isLogin;
+module.exports = {
+    isLogin,
+    LinkedineAuthetication,
+};

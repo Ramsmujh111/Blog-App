@@ -4,7 +4,8 @@ const { validateBlog } = require('../middleware/validations');
 require('../config/clodenary');
 exports.DashboardsUser = async (req, res) =>{
    try {
-      let blogs = await Blogs.find();
+    //   console.log(req.user);
+      let blogs = await Blogs.find({user:req.user._id});
       if(!blogs){
         return res.status(400).render("Dashboard.ejs" , {pageTitle:`Admin Dashboards Pannel` , message:'blog fetching fails' , status:false});
       }
@@ -18,18 +19,20 @@ exports.DashboardsUser = async (req, res) =>{
 }
 
 exports.getAddPost = async (req, res) =>{
-    res.render('Add-blogs.ejs' , { pageTitle:'Add Blogs' })
+    res.render('Add-blogs.ejs' , { pageTitle:'Add Blogs' , userId:req.user._id});
 }
 
 exports.postAddBlog = async (req , res) =>{
    try {
     const result = await cloudinary.v2.uploader.upload(req.file.path);
-    const { title , description } = req.body;
+    const { title , description , userId} = req.body;
+    console.log(userId);
     const validBlog = await validateBlog.validateAsync({title , description , fileUpload:result.url});
     const saveBlog = new Blogs({
         title:validBlog.title,
         description:validBlog.description,
         FileDestination:validBlog.fileUpload,
+        user:userId,
     })
     await saveBlog.save();
     console.log(`Blog has been add`);

@@ -14,10 +14,13 @@ const Blogs    = new Schema({
     },
     like:{
         type:Number,
+        default:0
     },
-    comment:{
-        commentId:String,
-        comment:String
+    comment:[String],
+    user: {
+        type: Schema.Types.ObjectId,
+        ref: "User",
+        required: true
     }
 },{
     timestamps:true

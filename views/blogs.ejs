@@ -2,7 +2,7 @@
 <link rel="stylesheet" type="text/css" href="/css/cart.css">
 <link rel="stylesheet" href="/css/cart.css">
 </head>
-<body>
+<body style="background-color: aliceblue;">
     <%-include("includes/navbar.ejs")%>
     <div class="card">
         <div class="card-body">
@@ -19,24 +19,48 @@
         <div class="d-flex justify-content-center row">
             <div class="col-md-8">
                 <div class="d-flex flex-column comment-section">
-                    <div class="bg-white p-2">
-                        <div class="d-flex flex-row user-info"><img class="rounded-circle" src="https://i.imgur.com/RpzrMR2.jpg" width="40">
-                            <div class="d-flex flex-column justify-content-start ml-2"><span class="d-block font-weight-bold name">Marry Andrews</span><span class="date text-black-50">Shared publicly - Jan 2020</span></div>
+                    <% if( blogs.comment.length > 0) { %>
+                        <% for(let i = 0; i<blogs.comment.length; i++) { %>
+                            <div class="bg-white p-2">
+                                <div class="d-flex flex-row user-info"><img class="rounded-circle" src="https://img.freepik.com/free-icon/user_318-159711.jpg?w=2000" width="40">
+                                    <div class="d-flex flex-column justify-content-start ml-2"><span class="date text-black-50" style="margin-left: 14px;">Shared publicly - Jan 2020</span></div>
+                                </div>
+                                 <div class="mt-2">
+                                    <p class="comment-text"><%= blogs.comment[i] %></p>
+                                </div>
+                            </div>
+                        <% } %>
+                    <% } else { %>
+                        <div class="bg-white p-2">
+                            <div class="d-flex flex-row user-info"><img class="rounded-circle" src="https://img.freepik.com/free-icon/user_318-159711.jpg?w=2000" width="40">
+                                <div class="d-flex flex-column justify-content-start ml-2"><span class="date text-black-50" style="margin-left: 14px;">Shared publicly - Jan 2020</span></div>
+                            </div>
+                             <div class="mt-2">
+                                <p class="comment-text">not any comment yet</p>
+                            </div>
                         </div>
-                        <div class="mt-2">
-                            <p class="comment-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                        </div>
-                    </div>
+                    <% } %>
+                    
                     <div class="bg-white">
                         <div class="d-flex flex-row fs-12">
-                            <div class="like p-2 cursor"><i class="fa fa-thumbs-o-up"></i><span class="ml-1">Like</span></div>
-                            <div class="like p-2 cursor"><i class="fa fa-commenting-o"></i><span class="ml-1">Comment</span></div>
-                            <div class="like p-2 cursor"><i class="fa fa-share"></i><span class="ml-1">Share</span></div>
+                            <form action="/blogs/like/<%= blogs._id %>" method="post">
+                                <div class="like p-2 cursor"><span class="ml-1"><button><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Facebook_Thumb_icon.svg/1200px-Facebook_Thumb_icon.svg.png" alt="" srcset="" style="height: 40px;"></button></span></div>
+                            </form>
+                            <div class="like p-2 cursor"><span class="ml-1"><%= blogs.like %></span></div>
+                            <form action="/blogs/dislike/<%= blogs._id %>" method="post">
+                                <div class="like p-2 cursor"><span class="ml-1"><button><img src="https://images.techhive.com/images/article/2015/11/dislike_facebook-100627022-large.jpg?auto=webp&quality=85,70" alt="" srcset="" style="height: 40px;"></button></span></div>
+                            </form>
+                            <form action="/share-linkedin/<%= blogs._id %>" method="post">
+                                <!-- <input type="hidden" name="id" value="<=% blogs._id %>"> -->
+                                <div class="like p-2 cursor"><span class="ml-1"><button type="submit" style="height: 80px; margin-left: 534px; border: none;"><img src="https://cdn.iconscout.com/icon/free/png-256/free-linkedin-share-button-3289858-2758556.png" alt="" srcset="" style="height: 80px;"></button></span></div>
+                            </form>                          
                         </div>
                     </div>
                     <div class="bg-light p-2">
-                        <div class="d-flex flex-row align-items-start"><img class="rounded-circle" src="https://i.imgur.com/RpzrMR2.jpg" width="40"><textarea class="form-control ml-1 shadow-none textarea"></textarea></div>
-                        <div class="mt-2 text-right"><button class="btn btn-primary btn-sm shadow-none" type="button">Post comment</button><button class="btn btn-outline-primary btn-sm ml-1 shadow-none" type="button">Cancel</button></div>
+                        <form action="/blogs/comment/<%= blogs._id %>" method="post">
+                            <div class="d-flex flex-row align-items-start"><img class="rounded-circle" src="https://img.freepik.com/free-icon/user_318-159711.jpg?w=2000" width="40"><textarea class="form-control ml-1 shadow-none textarea" style="margin-left: 10px;" name="comment"></textarea></div>
+                            <div class="mt-2 text-right"><button class="btn btn-primary btn-sm shadow-none" type="submit" style="margin-left: 46px;">Post comment</button></div>
+                       </form>
                     </div>
                 </div>
             </div>
