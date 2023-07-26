@@ -75,9 +75,7 @@ exports.postLogin = async (req, res)=> {
         )
         // set the cookie for the user
         res.cookie('token' , token , { httpOnly:true});
-        console.log(token)
         res.status(200).redirect('/blog/admin/dashboard');
-
     } catch (error) {
         console.log(error.message)
         console.log(error.stack)

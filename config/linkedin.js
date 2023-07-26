@@ -27,9 +27,7 @@ passport.use(
         // Save the access token for later use
         // You may want to store it in a database or session
         // You can also pass it as a parameter to the share LinkedIn route
-
-        profile.accessToken = accessToken;
-        console.log(JSON.stringify(profile));  
+        profile.accessToken = accessToken; 
         try {
             const existUser = await Linkedine.findOne({id:profile.id});
             if(existUser){

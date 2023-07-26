@@ -4,12 +4,10 @@ const { validateBlog } = require('../middleware/validations');
 require('../config/clodenary');
 exports.DashboardsUser = async (req, res) =>{
    try {
-    //   console.log(req.user);
       let blogs = await Blogs.find({user:req.user._id});
       if(!blogs){
         return res.status(400).render("Dashboard.ejs" , {pageTitle:`Admin Dashboards Pannel` , message:'blog fetching fails' , status:false});
       }
-    //   console.log(blogs);
       res.status(200).render("Dashboard.ejs" , {pageTitle:`Admin Dashboards Pannel` , blogs,});
    } catch (error) {
       console.log(error.message);
@@ -35,7 +33,6 @@ exports.postAddBlog = async (req , res) =>{
         user:userId,
     })
     await saveBlog.save();
-    console.log(`Blog has been add`);
     res.redirect('/blog/admin/dashboard');
    } catch (error) {
      console.log(error.message)

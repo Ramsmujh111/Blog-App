@@ -1,7 +1,6 @@
 const express   =   require('express');
 require('dotenv').config();
 const helmet    =   require('helmet')
-const cors      =   require('cors');
 const Session   =   require('express-session')
 const cookiesParser = require('cookie-parser');
 const MongoStore = require('connect-mongo');
@@ -18,6 +17,7 @@ const AuthRoutes=   require('./routes/auth');
 const AdminRoutes = require('./routes/AdminRoutes');
 const GoogleAuthRoutes = require('./routes/googleAuth');
 const LinkedinRoutes = require('./routes/linkedin');
+const unhandledExceptions = require('./middleware/Exceptions');
 // Initialize the Body parse for json data
 App.use(express.json());
 // Initialize the form-data from data
@@ -56,6 +56,12 @@ App.use('/Blog' , AuthRoutes);
 // implement google auth
 App.use(GoogleAuthRoutes);
 App.use(LinkedinRoutes);
+// page not founds
+App.use((req,res,next) => {
+    res.status(404).render('404.ejs' , {pageTitle:'page not founds'})
+})
+// unhandled exceptions
+unhandledExceptions();
 
 
 App.listen(PORT , ()=> {
