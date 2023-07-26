@@ -18,7 +18,7 @@ routes.get(
       res.redirect(`/blogs/${id}`);
     }
 );
-// middleware for authentication with login user
+
 routes.get('/getAccessToke' , (req, res) =>{
     res.render('linkdin.ejs',{ pageTitle:'Login with Linkedin To Get access Token'})
 })
