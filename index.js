@@ -48,14 +48,14 @@ App.use(passport.initialize())
 App.use(passport.session());
 // Establish the database connections
 // Admin routes
-App.use('/blog/admin' , AdminRoutes);
+// App.use('/blog/admin' , AdminRoutes);
 // blogs routes
 App.use(BlogRoutes);
 // auth routes
-App.use('/Blog' , AuthRoutes);
+// App.use('/Blog' , AuthRoutes);
 // implement google auth
-App.use(GoogleAuthRoutes);
-App.use(LinkedinRoutes);
+// App.use(GoogleAuthRoutes);
+// App.use(LinkedinRoutes);
 // page not founds
 App.use((req,res,next) => {
     res.status(404).render('404.ejs' , {pageTitle:'page not founds'})
