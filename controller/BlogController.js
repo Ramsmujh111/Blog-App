@@ -16,7 +16,7 @@ exports.GetHomePage =async (req, res) =>{
      } catch (error) {
         console.log(error.message);
         console.log(error.stack);
-        res.status(200).render("Home.ejs" , {pageTitle:`Blogs website` , message:`Internal server Error` , status:false});   
+        res.status(200).render("Home.ejs" , {pageTitle:`Blogs website` , message:`Internal server Error here is` , status:false});   
      }
 }
 
