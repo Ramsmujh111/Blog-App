@@ -26,7 +26,8 @@ App.use(express.urlencoded({extended:false}));
 // setup the view engine
 App.set('view engine' , "ejs");
 // App.set('views' , 'views');
-App.set('views', path.join(__dirname, 'views'));
+// App.set('views', path.join(__dirname, 'views'));
+App.set('views', __dirname + '/views');
 // setup the static file to save access css or js file extension
 App.use(express.static(__dirname + '/public'));
 
