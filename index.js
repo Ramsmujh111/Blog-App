@@ -32,7 +32,6 @@ App.use(express.static(__dirname + '/public'));
 
 App.use(morgan('dev'))
 App.use(methodOveride("_method"))
-// App.use(express.static('public'));
 // db connection
 dbConnection();
 // Initialize the session-cookies
