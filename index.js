@@ -13,6 +13,7 @@ const Linkedin = require('./config/linkedin');
 const dbConnection = require('./config/db-connect');
 const App       =   express();
 const BlogRoutes=   require('./routes/BlogRoutes');
+const path      = require('path');
 const AuthRoutes=   require('./routes/auth');
 const AdminRoutes = require('./routes/AdminRoutes');
 const GoogleAuthRoutes = require('./routes/googleAuth');
@@ -24,11 +25,14 @@ App.use(express.json());
 App.use(express.urlencoded({extended:false}));
 // setup the view engine
 App.set('view engine' , "ejs");
-App.set('views' , 'views');
+// App.set('views' , 'views');
+App.set('views', path.join(__dirname, 'views'));
+// setup the static file to save access css or js file extension
+App.use(express.static(__dirname + '/public'));
+
 App.use(morgan('dev'))
 App.use(methodOveride("_method"))
-// setup the static file to save access css or js file extension
-App.use(express.static('public'));
+// App.use(express.static('public'));
 // db connection
 dbConnection();
 // Initialize the session-cookies
